@@ -53,4 +53,208 @@ Desandar el camino de búsqueda, verificando el equilibrio de los nodos, y re-eq
 
 ![](https://commons.wikimedia.org/wiki/File:Insercion1.jpg)
 
+un ejemplo del codigo fuente de un arbolAVL, es el siguiente:
+"" "
+	Árbol AVL
+	"" "
+	de __future__ import  print_function
+	 Nodo de clase :
+	    def  __init__ ( self , label ):
+	        yo . etiqueta  =  etiqueta
+	        yo . _parent  =  Ninguno
+	        yo . _left  =  Ninguno
+	        yo . _right  =  Ninguno
+	        yo . altura  =  0
+	
+
+	    @ propiedad
+	    def  derecha ( yo ):
+	        volver a  sí mismo . _derecho
+	
+
+	    @ derecha . setter
+	    def  right ( self , node ):
+	        si el  nodo  no es  Ninguno : 
+	            nodo . _ parent  =  self
+	            yo . _derecha  =  nodo
+	
+
+	    @ propiedad
+	    def  left ( self ):
+	        volver a  sí mismo . _izquierda
+	
+
+	    @ izquierda . setter
+	    def  left ( self , node ):
+	        si el  nodo  no es  Ninguno : 
+	            nodo . _ parent  =  self
+	            yo . _izquierda  =  nodo
+	
+
+	    @ propiedad
+	    def  parent ( yo ):
+	        volver a  sí mismo . _padre
+	
+
+	    @ padre . setter
+	    def  padre ( yo , nodo ):
+	        si el  nodo  no es  Ninguno : 
+	            yo . _parent  =  nodo
+	            yo . altura  =  uno mismo . los padres . altura  +  1
+	        otra cosa :
+	            yo . altura  =  0
+	
+
+	
+
+	clase  AVL :
+	
+
+	    def  __init__ ( yo ):
+	        yo . root  =  Ninguno
+	        yo . tamaño  =  0
+	
+
+	    def  insert ( self , value ):
+	        nodo  =  nodo ( valor )
+	
+
+	        si  yo . root  es  Ninguno :
+	            yo . raíz  =  nodo
+	            yo . raíz . altura  =  0
+	            yo . tamaño  =  1
+	        otra cosa :
+	            dad_node  =  Ninguno
+	            curr_node  =  self . raíz
+	
+
+	            mientras que es  cierto :
+	                si  curr_node  no es  None : 
+	
+
+	                    dad_node  =  curr_node
+	
+
+	                    si  nodo . etiqueta  <  curr_node . etiqueta :
+	                        curr_node  =  curr_node . izquierda
+	                    otra cosa :
+	                        curr_node  =  curr_node . derecho
+	                otra cosa :
+	                    nodo . altura  =  papá_nodo . altura
+	                    dad_node . altura  + =  1
+	                    si  nodo . etiqueta  <  dad_node . etiqueta :
+	                        dad_node . izquierda  =  nodo
+	                    otra cosa :
+	                        dad_node . derecha  =  nodo
+	                    yo . reequilibrio ( nodo )
+	                    yo . tamaño  + =  1
+	                    descanso
+	
+
+	    def  reequilibrio ( auto , nodo ):
+	        n  =  nodo
+	
+
+	        mientras que  n  no es  Ninguno : 
+	            altura_derecha  =  n . altura
+	            altura_izquierda  =  n . altura
+	
+
+	            si  n . el derecho  no es  Ninguno : 
+	                altura_derecha  =  n . bien . altura
+	
+
+	            si  n . la izquierda  no es  Ninguno : 
+	                altura_izquierda  =  n . a la izquierda . altura
+	
+
+	            if  abs ( height_left  -  height_right ) >  1 :
+	                if  height_left  >  height_right :
+	                    hijo_izquierdo  =  n . izquierda
+	                    si  left_child  no es  None : 
+	                        h_right  = ( left_child . right . height
+	                                    if ( left_child . right  no es  None ) else 0 )  
+	                        h_left  = ( left_child . left . height
+	                                    if ( left_child . left  no es  None ) else 0 )  
+	                    si ( h_left  >  h_right ):
+	                        yo . rotate_left ( n )
+	                        descanso
+	                    otra cosa :
+	                        yo . doble_rotación_derecha ( n )
+	                        descanso
+	                otra cosa :
+	                    niño_derecho  =  n . derecho
+	                    si  right_child  no es  None : 
+	                        h_right  = ( right_child . right . height
+	                            if ( right_child . right  no es  None ) else 0 )  
+	                        h_left  = ( right_child . left . height
+	                            if ( right_child . left  no es  None ) else 0 )  
+	                    si ( h_left  >  h_right ):
+	                        yo . doble_rotate_izquierda ( n )
+	                        descanso
+	                    otra cosa :
+	                        yo . rotate_right ( n )
+	                        descanso
+	            n  =  n . padre
+	
+
+	    def  rotate_left ( self , nodo ):
+	        aux  =  nodo . los padres . etiqueta
+	        nodo . los padres . etiqueta  =  nodo . etiqueta
+	        nodo . los padres . derecha  =  Nodo ( aux )
+	        nodo . los padres . bien . altura  =  nodo . los padres . altura  +  1
+	        nodo . los padres . izquierda  =  nodo . derecho
+	
+
+	
+
+	    def  rotate_right ( self , nodo ):
+	        aux  =  nodo . los padres . etiqueta
+	        nodo . los padres . etiqueta  =  nodo . etiqueta
+	        nodo . los padres . izquierda  =  Nodo ( aux )
+	        nodo . los padres . a la izquierda . altura  =  nodo . los padres . altura  +  1
+	        nodo . los padres . derecha  =  nodo . derecho
+	
+
+	    def  double_rotate_left ( self , nodo ):
+	        yo . rotate_right ( nodo . getRight (). getRight ())
+	        yo . rotate_left ( nodo )
+	
+
+	    def  double_rotate_right ( self , nodo ):
+	        yo . rotate_left ( nodo . getLeft (). getLeft ())
+	        yo . rotate_right ( nodo )
+	
+
+	    def  vacío ( yo ):
+	        si  yo . root  es  Ninguno :
+	            volver  verdadero
+	        volver  falso
+	
+
+	    def  preShow ( self , curr_node ):
+	        si  curr_node  no es  None : 
+	            yo . preShow ( curr_node . izquierda )
+	            print ( curr_node . label , end = "" )
+	            yo . preShow ( curr_node . derecha )
+	
+
+	    def  preorder ( self , curr_node ):
+	        si  curr_node  no es  None : 
+	            yo . preShow ( curr_node . izquierda )
+	            yo . preShow ( curr_node . derecha )
+	            print ( curr_node . label , end = "" )
+	
+
+	    def  getRoot ( self ):
+	        volver a  sí mismo . raíz
+	
+
+	if  __name__  ==  '__main__' :
+	    t  =  AVL ()
+	    t . insertar ( 1 )
+	    t . insertar ( 2 )
+	    t . insertar ( 3 )
+	    t . preShow ( t . raíz )
+
 
